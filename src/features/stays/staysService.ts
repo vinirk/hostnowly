@@ -6,7 +6,7 @@ const mockStays: StayType[] = __stays;
 
 const getStays = async (): Promise<StayType[]> => {
   // Simulating an API call with a delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   return mockStays;
 };

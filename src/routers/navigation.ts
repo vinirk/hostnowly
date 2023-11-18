@@ -15,8 +15,8 @@ export const NavigationItems: NavItemType[] = [
   },
   {
     id: generateTimestampId(),
-    href: '/featured-stays',
-    name: 'Featured stays',
+    href: '/stays',
+    name: 'Stays',
   },
   {
     id: generateTimestampId(),

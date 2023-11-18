@@ -3,7 +3,7 @@
  * @param {string} stayId - The unique identifier of the stay.
  * @returns {string} The URL path to the stay's detail page.
  */
-const goToDetailByStayId = (stayId: string) => `/featured-stays/${stayId}`;
+const goToDetailByStayId = (stayId: string) => `/stays/${stayId}`;
 
 /**
  *

@@ -4,16 +4,16 @@ import ButtonLike from 'components/common/Button/ButtonLike';
 import { StayType } from 'types';
 import { FC } from 'react';
 import formatCurrency from 'utils/formatCurrency';
-import RentalCardGallerySlider from './StayCardGallerySlider';
 import { Badge } from 'components/common';
+import StayCardGallerySlider from 'components/StayCardGallerySlider';
 
-export interface RentalCardProps {
+export interface StayCardProps {
   className?: string;
   data?: StayType;
   onGoToDetail?: () => void;
 }
 
-const RentalCard: FC<RentalCardProps> = ({
+const StayCard: FC<StayCardProps> = ({
   className = '',
   data,
   onGoToDetail = () => {},
@@ -33,8 +33,8 @@ const RentalCard: FC<RentalCardProps> = ({
   const renderSliderGallery = () => {
     return (
       <div className='relative w-full'>
-        <RentalCardGallerySlider
-          uniqueID={`RentalCard_${id}`}
+        <StayCardGallerySlider
+          uniqueID={`StayCard_${id}`}
           ratioClass='aspect-w-4 aspect-h-3 '
           galleryImgs={galleryImgs || []}
         />
@@ -94,4 +94,4 @@ const RentalCard: FC<RentalCardProps> = ({
   );
 };
 
-export default RentalCard;
+export default StayCard;

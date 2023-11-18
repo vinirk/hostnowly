@@ -1,11 +1,11 @@
 import PageNotFound from 'components/common/PageNotFound';
-import Homepage from 'pages/Homepage';
-import ListFeaturedPlaces from 'pages/ListFeaturedStays';
-import ListingStayDetailPage from 'pages/ListingDetailPage';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PaymentConfirmedPage from 'pages/PaymentConfirmedPage';
-import MyBookingsPage from 'pages/MyBookingsPage';
 import Header from 'components/layout/Header';
+import Homepage from 'pages/Homepage';
+import ListingStayDetailPage from 'pages/ListingDetailPage';
+import MyBookingsPage from 'pages/MyBookingsPage';
+import PaymentConfirmedPage from 'pages/PaymentConfirmedPage';
+import StaysListPage from 'pages/StaysListPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 /**
  * Define all pages in the app
@@ -14,9 +14,9 @@ import Header from 'components/layout/Header';
 export const pages = [
   { path: '/', exact: true, component: Homepage },
   { path: '/#', exact: true, component: Homepage },
-  { path: '/featured-stays', exact: true, component: ListFeaturedPlaces },
+  { path: '/stays', exact: true, component: StaysListPage },
   {
-    path: '/featured-stays/:id',
+    path: '/stays/:id',
     exact: true,
     component: ListingStayDetailPage,
   },
@@ -29,6 +29,11 @@ export const pages = [
     path: '/payment-confirmed/:code',
     exact: true,
     component: PaymentConfirmedPage,
+  },
+  {
+    path: '/stays',
+    exact: true,
+    component: StaysListPage,
   },
 ];
 
