@@ -1,4 +1,4 @@
-# Stay and Booking Management App
+# Stay and Booking Management UI
 
 This React application utilizes Redux for state management and TypeScript for static typing, focusing on managing stays and bookings.
 
