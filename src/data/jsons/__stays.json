@@ -1,0 +1,132 @@
+[
+  {
+    "id": "1",
+    "host": {
+      "id": "will-be-change-later",
+      "stays": [],
+      "name": "Valmer"
+    },
+    "href": "/listing-stay-detail",
+    "title": "Entire villa",
+    "category": "House",
+    "address": "Rio de Janeiro, Brazil",
+    "description": "The House is equipped and complete, with a suite, a cozy bedroom and a social bathroom, providing maximum comfort for your stay. The balcony and private terrace offer ideal spaces for sunset over the ocean. In addition to the equipped kitchen and living room with sea view, the gourmet area with barbecue is perfect for outdoor culinary experiences. The House has wifi and modern appliances.",
+    "stars": 4.95,
+    "reviewCount": 20,
+    "like": false,
+    "price": 205,
+    "blockedDates": [],
+    "maxGuests": 4,
+    "discount": 0,
+    "galleryImgs": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-53769591/original/a164685d-8a5f-4411-9eec-4efc85456f71.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-53769591/original/c044f46f-7f35-4d10-bf76-e015b4d040d3.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-53769591/original/744fad46-c867-45fc-a53f-8dc833369d28.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-53769591/original/a65e863b-d99c-4933-a5e1-3ed3434e79fb.jpeg?im_w=720"
+    ]
+  },
+  {
+    "id": "2",
+    "host": {
+      "id": "will-be-change-later",
+      "stays": [],
+      "name": "Ricardo"
+    },
+    "href": "/listing-stay-detail",
+    "title": "Entire rental unit",
+    "category": "House",
+    "address": "Rio de Janeiro, Brazil",
+    "description": "The space was recently remodeled, 2 story Oceanfront Luxury Penthouse is located in the perfect and most sought after area of Copacabana Beach...Posto 6. The 1st floor has a large modern living room with comfortable furniture and the finest decoration, central air, private suite with jacuzzi, a large kitchen with the most modern equipment, plus a maids living area. The 2nd floor has 2 suits with air conditioning and one suite with jacuzzi, private pool with terrace and a stunning view of the beach, lounge room with comfortable couch and furnishings, 52' TV, entertaining kitchen, surround stereo and Wi-Fi internet.",
+    "stars": 4.89,
+    "reviewCount": 35,
+    "like": false,
+    "price": 1193,
+    "blockedDates": [],
+    "maxGuests": 6,
+    "discount": 0,
+    "galleryImgs": [
+      "https://a0.muscache.com/im/pictures/4ce1a3c9-a059-49ab-a07d-871a3a919d1f.jpg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/20255c24-3398-4d53-9ef3-084a841b07d7.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/199c6733-6370-4f56-aae9-0365787d9f06.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/5ee2cea5-eefb-41e9-94be-0d79ed27fd29.jpg?im_w=1440"
+    ]
+  },
+  {
+    "id": "3",
+    "host": {
+      "id": "will-be-change-later",
+      "stays": [],
+      "name": "Vivian"
+    },
+    "href": "/listing-stay-detail",
+    "title": "Amazing new house with great view",
+    "category": "House",
+    "address": "Foz do Iguaçu, Paraná, Brazil",
+    "description": "Welcome to @ okkafoz, the perfect getaway in the heart of Foz do Iguaçu. Our studio has been meticulously designed and decorated to provide a truly exceptional experience. Here, you can enjoy moments of pure relaxation in our wonderful soaking tub, contemplating the Paraná River and Paraguay at a dinner with a panoramic view. ",
+    "stars": 4.88,
+    "reviewCount": 8,
+    "like": false,
+    "price": 52,
+    "blockedDates": [],
+    "maxGuests": 3,
+    "discount": 0,
+    "galleryImgs": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-971705717158018714/original/8a0ea070-d713-4aa9-956a-05cba7201a84.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-971705717158018714/original/c7c23d44-c805-450d-ae10-df13419a580d.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-971705717158018714/original/bd8cea40-6ccf-4600-9c10-dbca5264b204.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-971705717158018714/original/4de530ae-d5e2-4c7a-91d2-336ad6efe2be.jpeg?im_w=720"
+    ]
+  },
+  {
+    "id": "4",
+    "host": {
+      "id": "will-be-change-later",
+      "stays": [],
+      "name": "Halle"
+    },
+    "href": "/listing-stay-detail",
+    "title": "3BRM 2Bath Sky View apt in DTLA Crypto Arena",
+    "category": "Hotel",
+    "address": "Vernon, California, United States",
+    "description": "Welcome to the ultimate luxury experience in the heart of downtown LA! Our 3 bedroom, 2.5 bathroom high-rise is the epitome of modern luxury and style. As soon as you step into the property, you'll be greeted by floor-to-ceiling glass windows that offer stunning views of the city skyline. Imagine waking up to the sight of the sun rising over the city, or relaxing in the evening with a glass of wine while watching the twinkling lights of downtown LA.",
+    "stars": 4.79,
+    "reviewCount": 19,
+    "like": false,
+    "price": 316,
+    "blockedDates": [],
+    "maxGuests": 8,
+    "discount": 0,
+    "galleryImgs": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-44594226/original/80f356a1-ddb9-4b6e-ae33-c8abdccb685e.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/033cb596-379a-4c11-92b9-97197fc2377b.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/3e585188-dbdf-4999-8836-12d9dfbe4af2.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-44594226/original/578f0f4c-ecbc-46f8-b0f4-c3daa569119f.jpeg?im_w=720"
+    ]
+  },
+  {
+    "id": "5",
+    "host": {
+      "id": "will-be-change-later",
+      "stays": [],
+      "name": "Sam"
+    },
+    "href": "/listing-stay-detail",
+    "title": "Luxury Modern House With Private Rooftop Patio",
+    "category": "Home",
+    "address": "Los Angeles, California, United States",
+    "description": "As you step inside, you'll be greeted by high ceilings and a bright and airy atmosphere that invites you to unwind and relax. Every inch of this home has been meticulously designed to offer you the ultimate in comfort and luxury, from the high-quality furnishings and linens to the top-of-the-line appliances. The main attraction of the house is undoubtedly the rooftop lounge, where you can take in the glittering skyline under the stars while enjoying a glass of wine or entertaining friends. The space is an entertainer's paradise, complete with a private sunbathing area and plenty of seating for you and your guests.",
+    "stars": 4.96,
+    "reviewCount": 26,
+    "like": false,
+    "price": 514,
+    "blockedDates": [],
+    "maxGuests": 6,
+    "discount": 0,
+    "galleryImgs": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-831200413874254948/original/e0558b77-05f8-4728-ade7-cb5739bf5c09.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-831200413874254948/original/5cacabb8-a49e-4b09-8971-dcebb9d9e6b2.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-831200413874254948/original/c5c9a033-130a-451d-9bb9-5ad849f653fa.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-831200413874254948/original/a9e27a05-e6ee-4a9d-b733-264586f08b5a.jpeg?im_w=720"
+    ]
+  }
+]
