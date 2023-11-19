@@ -1,6 +1,7 @@
 import SearchBar from 'components/SearchBar';
 import ButtonPrimary from 'components/common/Button/ButtonPrimary';
 import { FC } from 'react';
+import { goToStaysList } from 'selectors/routes';
 
 export interface HomePageBannerProps {
   className?: string;
