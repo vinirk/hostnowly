@@ -1,72 +1,25 @@
-import { FC, useEffect, useState } from 'react';
-import GuestsInput from './GuestsInput';
-import LocationInput from './LocationInput';
-import SearchMobileDateRange from './SearchMobileDateRangeProps';
-import { useDispatch } from 'react-redux';
-import { setFilters } from 'features/booking/bookingSlice';
-import { useSelector } from 'react-redux';
 import { RootState } from 'app/store';
+import { FC, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { formatDate } from 'utils/dateFormatters';
-import { StayType } from 'types';
+import GuestsInput from '../../../common/GuestsInput/GuestsInput';
+import LocationInput from './LocationInput';
+import SearchMobileDateRange from './SearchMobileDateRangeProps';
+import { useFilterChange } from 'hooks/useFilterChange';
 
 interface StaySearchFormMobileProps {
   onCloseModal: () => void;
 }
 
-const StaySearchFormMobile: FC<StaySearchFormMobileProps> = ({
-  onCloseModal,
-}) => {
-  const [fieldNameShow, setFieldNameShow] = useState('location');
-  const [locationInputTo, setLocationInputTo] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const dispatch = useDispatch();
-  const filter = useSelector((state: RootState) => state.booking?.filter);
+const StaySearchFormMobile: FC<StaySearchFormMobileProps> = () => {
   const { id } = useParams<{ id: string }>();
-  const currentStay = useSelector((state: RootState) =>
-    state.general.stays.find((item: StayType) => item.id === id)
-  );
+  const [fieldNameShow, setFieldNameShow] = useState('location');
+  const filter = useSelector((state: RootState) => state.filters);
   const blockedDates = useSelector(
     (state: RootState) => state.booking?.blockedDates
   );
-
-  useEffect(() => {
-    const { startDate, endDate } = filter;
-    if (startDate && endDate) {
-      setStartDate(startDate);
-      setEndDate(endDate);
-    }
-  }, [filter?.startDate, filter?.endDate]);
-
-  // const handleChangeDate = (dates: [Date | null, Date | null]) => {
-  //   const [start, end] = dates;
-  //   setStartDate(start);
-  //   setEndDate(end);
-  //   if (start && end) {
-  //     onChangeDate(start, end);
-  //   }
-  // };
-
-  const handleChangeGuests = (adults: number, children: number) => {
-    dispatch(setFilters({ guestAdults: adults, guestChildren: children }));
-  };
-
-  const handleChangeLocation = (value: string) => {
-    setLocationInputTo(value);
-  };
-
-  const handleChangeDate = (startDate: Date, endDate: Date) => {
-    const startDateString = startDate.toISOString();
-    const endDateString = endDate.toISOString();
-    dispatch(
-      setFilters({
-        startDate: startDateString,
-        endDate: endDateString,
-        price: currentStay?.price,
-      })
-    );
-  };
+  const handleChangeFilter = useFilterChange();
 
   const renderInputLocation = () => {
     const isActive = fieldNameShow === 'location';
@@ -84,11 +37,11 @@ const StaySearchFormMobile: FC<StaySearchFormMobileProps> = ({
             onClick={() => setFieldNameShow('location')}
           >
             <span className='text-neutral-400'>Where</span>
-            <span>{locationInputTo || 'Location'}</span>
+            <span>{filter?.location || 'Location'}</span>
           </button>
         ) : (
           <LocationInput
-            onChange={handleChangeLocation}
+            onChange={(location) => handleChangeFilter({ location })}
             onClick={() => setFieldNameShow('dates')}
           />
         )}
@@ -114,15 +67,22 @@ const StaySearchFormMobile: FC<StaySearchFormMobileProps> = ({
           >
             <span className='text-neutral-400'>When</span>
             <span>
-              {startDate ? `${formatDate(startDate, endDate)}` : 'Add date'}
+              {filter?.startDate
+                ? `${formatDate(filter?.startDate, filter?.endDate)}`
+                : 'Add date'}
             </span>
           </button>
         ) : (
           <SearchMobileDateRange
-            onChangeDate={handleChangeDate}
             blockedDates={blockedDates.filter((item) => item.stayId === id)}
             initialStartDate={filter?.startDate}
             initialEndDate={filter?.endDate}
+            onChangeDate={(startDate, endDate) =>
+              handleChangeFilter({
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+              })
+            }
           />
         )}
       </div>
@@ -147,15 +107,17 @@ const StaySearchFormMobile: FC<StaySearchFormMobileProps> = ({
           >
             <span className='text-neutral-400'>Who</span>
             <span>
-              {`${filter?.guestAdults + filter?.guestChildren} guests` ||
+              {`${(filter?.adults ?? 0) + (filter?.children ?? 0)} guests` ||
                 `Add guests`}
             </span>
           </button>
         ) : (
           <GuestsInput
-            onChangeFilters={handleChangeGuests}
-            guestAdults={filter?.guestAdults}
-            guestChildren={filter?.guestChildren}
+            adults={filter?.adults}
+            children={filter?.children}
+            onChangeFilters={(adults, children) =>
+              handleChangeFilter({ adults, children })
+            }
           />
         )}
       </div>

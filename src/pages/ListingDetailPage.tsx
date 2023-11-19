@@ -1,11 +1,11 @@
 import { RootState } from 'app/store';
 import MobileFooterSticky from 'components/Navigation/(mobile)/MobileFooterSticker';
+import SidebarStayDetail from 'components/SidebarStayDetail';
 import SectionDateRange from 'components/StayDateRangeCard';
 import SectionStayDetail from 'components/StayDetailCard';
 import SectionStayGuests from 'components/StayDetailGuestsCard';
-import SidebarStayDetail from 'components/SidebarStayDetail';
 import ImageModal from 'components/common/SimpleImageModal/SimpleImageModal';
-import { setFilters } from 'features/booking/bookingSlice';
+import { setFilters } from 'features/filters/filtersSlice';
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -20,7 +20,7 @@ const StayDetailPageContainer: FC<ListingDetailPageProps> = () => {
   const currentStay = useSelector((state: RootState) =>
     state.general.stays.find((item: StayType) => item.id === id)
   );
-  const filter = useSelector((state: RootState) => state.booking?.filter);
+  const filter = useSelector((state: RootState) => state.filters);
   const blockedDates = useSelector(
     (state: RootState) => state.booking?.blockedDates
   );
@@ -108,8 +108,8 @@ const StayDetailPageContainer: FC<ListingDetailPageProps> = () => {
           />
           <SectionStayGuests title="Who's coming?" />
           <SectionDateRange
-            startDate={new Date(filter?.startDate)}
-            endDate={new Date(filter?.endDate)}
+            startDate={filter?.startDate}
+            endDate={filter?.endDate}
             onChangeDate={handleChangeDate}
             blockedDates={blockedDates.filter((item) => item.stayId === id)}
           />

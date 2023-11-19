@@ -1,5 +1,5 @@
-import DatePickerCustomDay from 'components/common/DateRangeInput/DatePickerCustomDay';
-import DatePickerCustomHeaderTwoMonth from 'components/common/DateRangeInput/DatePickerCustomHeaderTwoMonth';
+import DatePickerCustomDay from 'components/common/DateRangeInputPopover/DatePickerCustomDay';
+import DatePickerCustomHeaderTwoMonth from 'components/common/DateRangeInputPopover/DatePickerCustomHeaderTwoMonth';
 import { FC, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { BlockedDates } from 'types';
@@ -82,6 +82,7 @@ const SearchMobileDateRange: FC<SearchMobileDateRangeProps> = ({
           endDate={endDate}
           filterDate={isBlocked}
           selectsRange
+          readOnly
           monthsShown={2}
           showPopperArrow={false}
           inline

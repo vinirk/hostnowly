@@ -2,14 +2,15 @@ import { AppDispatch, RootState } from 'app/store';
 import GuestsInput from 'components/GuestsInputPopover';
 import StarRating from 'components/common/StarRating';
 import ButtonPrimary from 'components/common/Button/ButtonPrimary';
-import DateRangeInput from 'components/common/DateRangeInput';
+import DateRangeInput from 'components/common/DateRangeInputPopover/DateRangeInputPopover';
 import { useToast } from 'contexts/ToastContext';
-import { confirmBookingAsync, setFilters } from 'features/booking/bookingSlice';
+import { confirmBookingAsync } from 'features/booking/bookingSlice';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { goToConfirmedPayment } from 'selectors/routes';
 import formatCurrency from 'utils/formatCurrency';
+import { setFilters } from 'features/filters/filtersSlice';
 
 interface SiderbarDetailPageProps {
   stayId?: string;
@@ -22,8 +23,10 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
   price,
   stars,
 }) => {
-  const filter = useSelector((state: RootState) => state.booking?.filter);
-  const details = useSelector((state: RootState) => state.booking?.details);
+  const filter = useSelector((state: RootState) => state.filters);
+  const bookingDetail = useSelector(
+    (state: RootState) => state.booking?.detail
+  );
   const blockedDates = useSelector(
     (state: RootState) => state.booking?.blockedDates
   );
@@ -32,8 +35,8 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
   const { showToast } = useToast();
 
   useEffect(() => {
-    handleChangeFilters(filter?.guestAdults, filter?.guestChildren);
-  }, [filter?.guestAdults, filter?.guestChildren]);
+    handleChangeFilters(filter?.adults ?? 0, filter?.children || 0);
+  }, [filter?.adults, filter?.children]);
 
   /**
    *  Handle change guest adults and children filter
@@ -43,8 +46,8 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
   const handleChangeFilters = (adults: number, children: number) => {
     dispatch(
       setFilters({
-        guestAdults: adults,
-        guestChildren: children,
+        adults,
+        children,
         price: price,
       })
     );
@@ -56,10 +59,12 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
    * @param endDate
    */
   const handleChangeDate = (startDate: Date, endDate: Date) => {
-    const startDateString = startDate.toISOString();
-    const endDateString = endDate.toISOString();
     dispatch(
-      setFilters({ startDate: startDateString, endDate: endDateString, price })
+      setFilters({
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        price,
+      })
     );
   };
 
@@ -70,6 +75,7 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
     try {
       const actionResult = await dispatch(confirmBookingAsync({ stayId }));
       if (confirmBookingAsync.fulfilled.match(actionResult)) {
+        console.log(actionResult, stayId)
         navigate(goToConfirmedPayment(actionResult.payload.confirmationCode));
         showToast('Booking successful! Your reservation has been confirmed.');
       } else if (confirmBookingAsync.rejected.match(actionResult)) {
@@ -99,8 +105,8 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
       <form className='flex flex-col border border-neutral-200 dark:border-neutral-700 rounded-3xl '>
         <DateRangeInput
           highlightFocused={false}
-          initialStartDate={filter?.startDate}
-          initialEndDate={filter?.endDate}
+          startDate={filter?.startDate}
+          endDate={filter?.endDate}
           onChangeDate={handleChangeDate}
           blockedDates={blockedDates.filter((item) => item.stayId === stayId)}
         />
@@ -108,8 +114,8 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
         <GuestsInput
           highlightFocused={false}
           className='flex-1'
-          guestAdults={filter?.guestAdults}
-          guestChildren={filter?.guestChildren}
+          adults={filter?.adults}
+          children={filter?.children}
           onChangeFilters={handleChangeFilters}
         />
       </form>
@@ -117,36 +123,40 @@ const SidebarStayDetai: React.FC<SiderbarDetailPageProps> = ({
       <div className='flex flex-col space-y-4'>
         <div className='flex justify-between text-neutral-6000 dark:text-neutral-300 font-semibold'>
           <span>
-            {formatCurrency(price ?? 0)} x {Math.round(details?.nights)}{' '}
-            {details?.nights <= 1 ? 'night' : 'nights'}
+            {formatCurrency(price ?? 0)} x {Math.round(bookingDetail?.nights)}{' '}
+            {bookingDetail?.nights <= 1 ? 'night' : 'nights'}
           </span>
-          <span>{formatCurrency(details?.subtotal)}</span>
+          <span>{formatCurrency(bookingDetail?.subtotal)}</span>
         </div>
         <div className='flex justify-between ml-3 text-sm text-neutral-6000 dark:text-neutral-300'>
-          <span>{filter?.guestAdults} x Adults</span>
-          <span>{formatCurrency(details?.subtotalAdults)}</span>
+          <span>{filter?.adults} x Adults</span>
+          <span>{formatCurrency(bookingDetail?.subtotalAdults)}</span>
         </div>
         <div className='flex justify-between ml-3 text-sm text-neutral-6000 dark:text-neutral-300'>
-          <span>{filter?.guestChildren} x Children (-50%)</span>
-          <span>{formatCurrency(details?.subtotalChildren)}</span>
+          <span>{filter?.children} x Children (-50%)</span>
+          <span>{formatCurrency(bookingDetail?.subtotalChildren)}</span>
         </div>
         <div className='flex justify-between text-neutral-6000 dark:text-neutral-300'>
           <span>Sub total</span>
-          <span>{formatCurrency(details?.subtotal)}</span>
+          <span>{formatCurrency(bookingDetail?.subtotal)}</span>
         </div>
         <div className='flex justify-between text-neutral-6000 dark:text-neutral-300'>
           <span>Service fee (10%)</span>
-          <span>{formatCurrency(details?.serviceFee)}</span>
+          <span>{formatCurrency(bookingDetail?.serviceFee)}</span>
         </div>
         <div className='border-b border-neutral-200 dark:border-neutral-700'></div>
         <div className='flex justify-between font-semibold'>
           <span>Total (USD)</span>
-          <span>{formatCurrency(details?.subtotal + details?.serviceFee)}</span>
+          <span>
+            {formatCurrency(
+              bookingDetail?.subtotal + bookingDetail?.serviceFee
+            )}
+          </span>
         </div>
       </div>
 
       <ButtonPrimary
-        disabled={details?.nights === 0}
+        disabled={bookingDetail?.nights === 0}
         onClick={handleConfirmBooking}
       >
         Book now

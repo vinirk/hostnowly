@@ -1,7 +1,5 @@
-'use client';
-
 import { ClockIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import React, { useState, useRef, useEffect, FC } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import ClearDataButton from './ClearDataButton';
 
 export interface LocationInputProps {
@@ -48,7 +46,6 @@ const LocationInput: FC<LocationInputProps> = ({
 
   const eventClickOutsideDiv = (event: MouseEvent) => {
     if (!containerRef.current) return;
-    // CLICK IN_SIDE
     if (!showPopover || containerRef.current.contains(event.target as Node)) {
       return;
     }

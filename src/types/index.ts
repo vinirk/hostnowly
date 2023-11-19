@@ -58,3 +58,10 @@ export interface BookingType {
   cancellationDate?: string;
   totalPrice: number;
 }
+
+export interface StaySearchFilters {
+  adults: number | null;
+  children: number | null;
+  startDate: Date | null;
+  endDate: Date | null;
+}

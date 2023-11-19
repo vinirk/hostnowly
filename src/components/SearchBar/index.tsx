@@ -1,42 +1,37 @@
-'use client';
-
 import { RootState } from 'app/store';
 import GuestsInput from 'components/GuestsInputPopover';
 import ButtonSubmit from 'components/common/Button/ButtonSubmit';
-import DateRangeInput from 'components/common/DateRangeInput';
-import { setFilters } from 'features/booking/bookingSlice';
+import DateRangeInput from 'components/common/DateRangeInputPopover/DateRangeInputPopover';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LocationInput from './LocationInput';
+import { setFilters } from 'features/filters/filtersSlice';
 
 export interface SearchBarProps {
   className?: string;
   location?: string;
   startDate?: Date;
   endDate?: Date;
-  guestAdults?: number;
-  guestChildren?: number;
+  adults?: number;
+  children?: number;
 }
 
 const SearchBar: FC<SearchBarProps> = ({ className = '' }) => {
   const dispatch = useDispatch();
-  const filter = useSelector((state: RootState) => state.booking?.filter);
+  const filter = useSelector((state: RootState) => state.filters);
 
   const handleChangeFilters = (adults: number, children: number) => {
-    dispatch(setFilters({ guestAdults: adults, guestChildren: children }));
+    dispatch(setFilters({ adults, children }));
   };
 
   const handleChangeDate = (startDate: Date, endDate: Date) => {
-    const startDateString = startDate.toISOString();
-    const endDateString = endDate.toISOString();
     dispatch(
-      setFilters({ startDate: startDateString, endDate: endDateString })
+      setFilters({
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+      })
     );
   };
-
-  // useEffect(() => {
-  //   dispatch(setFilters({ guestAdults: 4, childrenGuests: 1 }));
-  // }, [dispatch]);
 
   return (
     <div
@@ -46,16 +41,16 @@ const SearchBar: FC<SearchBarProps> = ({ className = '' }) => {
         <LocationInput className='flex-[1.5]' />
         <div className='self-center border-r border-slate-200 dark:border-slate-700 h-8'></div>
         <DateRangeInput
-          initialStartDate={filter?.startDate}
-          initialEndDate={filter?.endDate}
+          startDate={filter?.startDate}
+          endDate={filter?.endDate}
           className='flex-1'
           onChangeDate={handleChangeDate}
         />
         <div className='self-center border-r border-slate-200 dark:border-slate-700 h-8'></div>
         <GuestsInput
           className='flex-1'
-          guestAdults={filter?.guestAdults}
-          guestChildren={filter?.guestChildren}
+          adults={filter?.adults}
+          children={filter?.children}
           onChangeFilters={handleChangeFilters}
         />
         <div className='flex items-center mx-3'>

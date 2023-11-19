@@ -12,6 +12,7 @@ import GuestsIcon from 'icons/Guests';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
+import { goToStaysList } from 'selectors/routes';
 import { BookingType, StayType } from 'types';
 import { formatDate, formatDateTime } from 'utils/dateFormatters';
 import formatCurrency from 'utils/formatCurrency';
@@ -191,7 +192,7 @@ const PaymentConfirmedPage: FC<PaymentConfirmedPageProps> = ({
               Cancel booking
             </ButtonPrimary>
           ) : !currentBooking?.cancellationDate ? (
-            <ButtonPrimary href='/featured-stays'>
+            <ButtonPrimary href={goToStaysList()}>
               Explore more stays
             </ButtonPrimary>
           ) : null}

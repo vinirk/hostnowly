@@ -1,12 +1,12 @@
-import DatePickerCustomDay from 'components/common/DateRangeInput/DatePickerCustomDay';
-import DatePickerCustomHeaderTwoMonth from 'components/common/DateRangeInput/DatePickerCustomHeaderTwoMonth';
+import DatePickerCustomDay from 'components/common/DateRangeInputPopover/DatePickerCustomDay';
+import DatePickerCustomHeaderTwoMonth from 'components/common/DateRangeInputPopover/DatePickerCustomHeaderTwoMonth';
 import { BlockedDates } from 'types';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 interface SectionDateRangeProps {
-  startDate?: Date;
-  endDate?: Date;
+  startDate?: string;
+  endDate?: string;
   blockedDates?: BlockedDates[];
   onChangeDate?: (startDate: Date, endDate: Date) => void;
 }
@@ -21,9 +21,10 @@ const SectionDateRange = ({
   const [currentEndDate, setCurrentEndDate] = useState<Date | null>();
 
   useEffect(() => {
+    console.log('startDate', startDate);
     if (startDate && endDate) {
-      setCurrentStartDate(startDate);
-      setCurrentEndDate(endDate);
+      setCurrentStartDate(new Date(startDate));
+      setCurrentEndDate(new Date(endDate));
     }
   }, [startDate, endDate]);
 
@@ -42,21 +43,35 @@ const SectionDateRange = ({
    * @returns
    */
   const isBlocked = (date: Date) => {
-    const normalizedDate = new Date(date.setHours(0, 0, 0, 0));
-    const isPastDate =
-      normalizedDate < new Date(new Date().setHours(0, 0, 0, 0));
-    if (isPastDate) {
-      return true;
-    }
-    const blockedIntervals = blockedDates;
+    // Normaliza a data recebida para meia-noite
+    const normalizedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
 
-    return !blockedIntervals?.some((interval) => {
+    // Verifica se a data está dentro de algum intervalo de datas bloqueadas
+    return blockedDates?.some((interval) => {
       const start = new Date(interval.start);
       start.setHours(0, 0, 0, 0);
       const end = new Date(interval.end);
-      end.setHours(0, 0, 0, 0);
-      date.setHours(0, 0, 0, 0);
-      return date >= start && date <= end;
+      end.setHours(23, 59, 59, 999); // Ajusta para o final do dia
+      return normalizedDate >= start && normalizedDate <= end;
+    });
+  };
+
+  const handleBlockedDate = (blockedDates: BlockedDates[]) => {
+    return blockedDates?.map((interval) => {
+      const start = new Date(interval.start);
+      start.setHours(0, 0, 0, 0);
+
+      const end = new Date(interval.end);
+      end.setHours(23, 59, 59, 999);
+
+      return {
+        start,
+        end,
+      };
     });
   };
 
@@ -77,7 +92,11 @@ const SectionDateRange = ({
             onChange={handleChangeDate}
             startDate={currentStartDate}
             endDate={currentEndDate}
-            filterDate={isBlocked}
+            minDate={new Date()}
+            excludeDateIntervals={blockedDates.map((interval) => ({
+              start: new Date(interval.start),
+              end: new Date(interval.end),
+            }))}
             selectsRange
             monthsShown={2}
             showPopperArrow={false}

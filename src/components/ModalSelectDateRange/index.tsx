@@ -1,8 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import ButtonPrimary from 'components/common/Button/ButtonPrimary';
-import DatePickerCustomDay from 'components/common/DateRangeInput/DatePickerCustomDay';
-import DatePickerCustomHeaderTwoMonth from 'components/common/DateRangeInput/DatePickerCustomHeaderTwoMonth';
+import DatePickerCustomDay from 'components/common/DateRangeInputPopover/DatePickerCustomDay';
+import DatePickerCustomHeaderTwoMonth from 'components/common/DateRangeInputPopover/DatePickerCustomHeaderTwoMonth';
 import { BlockedDates } from 'types';
 import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -46,6 +46,9 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
+    if (start && end) {
+      onChangeDate(start, end);
+    }
   };
 
   const closeModal = () => {

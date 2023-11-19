@@ -1,44 +1,31 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import GuestsInput from 'components/Navigation/(mobile)/SearchMobile/GuestsInput';
 import ButtonPrimary from 'components/common/Button/ButtonPrimary';
-import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
+import GuestsInput from 'components/common/GuestsInput/GuestsInput';
+import React, { FC, Fragment, useState } from 'react';
 
 interface ModalSelectGuestsProps {
   renderChildren?: (p: { openModal: () => void }) => React.ReactNode;
-  guestAdults?: number;
-  guestChildren?: number;
+  adults?: number;
+  children?: number;
   onChangeGuests?: (adults: number, children: number) => void;
 }
 
 const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({
   renderChildren,
-  guestAdults,
-  guestChildren,
+  adults = 0,
+  children = 0,
   onChangeGuests = () => {},
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(0);
-  const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(0);
 
-  const previousGuestAdults = useRef(guestAdults);
-  const previousGuestChildren = useRef(guestChildren);
+  const [tempAdults, setTempAdults] = useState(adults);
+  const [tempChildren, setTempChildren] = useState(children);
 
   const [resetKey, setResetKey] = useState(0);
 
-  useEffect(() => {
-    setGuestAdultsInputValue(guestAdults || 0);
-    setGuestChildrenInputValue(guestChildren || 0);
-  }, [guestAdults, guestChildren]);
-
   const closeModal = () => {
     setShowModal(false);
-    setGuestAdultsInputValue(previousGuestAdults.current || 0);
-    setGuestChildrenInputValue(previousGuestChildren.current || 0);
-    onChangeGuests(
-      previousGuestAdults.current || 0,
-      previousGuestChildren.current || 0
-    );
   };
 
   const openModal = () => {
@@ -46,17 +33,13 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({
   };
 
   const saveAndCloseModal = () => {
-    setShowModal(false);
-    setGuestAdultsInputValue(guestAdults ?? 0);
-    setGuestChildrenInputValue(guestChildren ?? 0);
-    previousGuestAdults.current = guestAdults ?? 0;
-    previousGuestChildren.current = guestChildren ?? 0;
+    closeModal();
+    onChangeGuests(tempAdults, tempChildren);
   };
 
   const resetFilters = () => {
     setResetKey((prevKey) => prevKey + 1);
-    setGuestAdultsInputValue(0);
-    setGuestChildrenInputValue(0);
+    onChangeGuests(0, 0);
   };
 
   const renderButtonOpenModal = () => {
@@ -111,9 +94,12 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({
                               <GuestsInput
                                 key={resetKey}
                                 className='flex-1'
-                                guestAdults={guestAdultsInputValue}
-                                guestChildren={guestChildrenInputValue}
-                                onChangeFilters={onChangeGuests}
+                                adults={adults}
+                                children={children}
+                                onChangeFilters={(newAdults, newChildren) => {
+                                  setTempAdults(newAdults);
+                                  setTempChildren(newChildren);
+                                }}
                               />
                             </div>
                           </div>
@@ -129,9 +115,7 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({
                         Clear guests
                       </button>
                       <ButtonPrimary
-                        disabled={
-                          guestAdultsInputValue + guestChildrenInputValue < 1
-                        }
+                        disabled={(adults ?? 0) + (children ?? 0) < 1}
                         sizeClass='px-6 py-3 !rounded-xl'
                         onClick={saveAndCloseModal}
                       >

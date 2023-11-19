@@ -1,16 +1,16 @@
 import { AppDispatch, RootState } from 'app/store';
-import ButtonPrimary from 'components/common/Button/ButtonPrimary';
-import { useToast } from 'contexts/ToastContext';
 import ModalSelectDate from 'components/ModalSelectDateRange';
 import ModalSelectGuests from 'components/ModalSelectGuests';
-import { StayType } from 'types';
-import { confirmBookingAsync, setFilters } from 'features/booking/bookingSlice';
-import { useEffect } from 'react';
+import ButtonPrimary from 'components/common/Button/ButtonPrimary';
+import { useToast } from 'contexts/ToastContext';
+import { confirmBookingAsync } from 'features/booking/bookingSlice';
+import { useFilterChange } from 'hooks/useFilterChange';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import formatCurrency from 'utils/formatCurrency';
-import { formatDate } from 'utils/dateFormatters';
 import { goToConfirmedPayment } from 'selectors/routes';
+import { StayType } from 'types';
+import { formatDate } from 'utils/dateFormatters';
+import formatCurrency from 'utils/formatCurrency';
 
 const MobileFooterSticky = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,43 +19,15 @@ const MobileFooterSticky = () => {
   const currentStay = useSelector((state: RootState) =>
     state.general.stays.find((item: StayType) => item.id === id)
   );
-  const filter = useSelector((state: RootState) => state.booking?.filter);
-  const details = useSelector((state: RootState) => state.booking?.details);
+  const filter = useSelector((state: RootState) => state.filters);
+  const bookingDetail = useSelector(
+    (state: RootState) => state.booking?.detail
+  );
   const blockedDates = useSelector(
     (state: RootState) => state.booking?.blockedDates
   );
   const { showToast } = useToast();
-
-  const handleChangeDate = (startDate: Date, endDate: Date) => {
-    const startDateString = startDate.toISOString();
-    const endDateString = endDate.toISOString();
-    dispatch(
-      setFilters({
-        startDate: startDateString,
-        endDate: endDateString,
-        price: currentStay?.price,
-      })
-    );
-  };
-
-  /**
-   *  Handle change guest adults and children filter
-   * @param adults
-   * @param children
-   */
-  const handleChangeFilters = (adults: number, children: number) => {
-    dispatch(
-      setFilters({
-        guestAdults: adults,
-        guestChildren: children,
-        price: currentStay?.price,
-      })
-    );
-  };
-
-  useEffect(() => {
-    handleChangeFilters(filter?.guestAdults, filter?.guestChildren);
-  }, [filter?.guestAdults, filter?.guestChildren]);
+  const handleChangeFilter = useFilterChange();
 
   /**
    * Handle confirm booking
@@ -79,7 +51,10 @@ const MobileFooterSticky = () => {
   };
 
   const formatGuestText = () => {
-    const total = filter?.guestAdults + (filter?.guestChildren ?? 0);
+    const totalAdults = filter?.adults ?? 0;
+    const totalChildren = filter?.children ?? 0;
+    const total = totalAdults + totalChildren;
+
     return total === 0
       ? 'Select guests'
       : total === 1
@@ -94,12 +69,17 @@ const MobileFooterSticky = () => {
           <span className='block '>
             {formatCurrency(currentStay?.price ?? 0)}
             <span className='ml-1 text-sm font-normal text-neutral-500 dark:text-neutral-400'>
-              x {Math.round(details?.nights)} nights
+              x {Math.round(bookingDetail?.nights)} nights
             </span>
           </span>
 
           <ModalSelectDate
-            onChangeDate={handleChangeDate}
+            onChangeDate={(startDate, endDate) =>
+              handleChangeFilter({
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+              })
+            }
             blockedDates={blockedDates.filter((item) => item.stayId === id)}
             currentStartDate={filter?.startDate}
             currentEndDate={filter?.endDate}
@@ -108,7 +88,7 @@ const MobileFooterSticky = () => {
                 onClick={openModal}
                 className='block text-sm underline font-medium'
               >
-                {formatDate(filter?.startDate, filter?.endDate)}
+                {formatDate(filter?.startDate ?? '', filter?.endDate)}
               </span>
             )}
           />
@@ -117,16 +97,20 @@ const MobileFooterSticky = () => {
         <div>
           <span className='block font-semibold'>
             <span className='text-xl'>
-              {formatCurrency(details?.subtotal + details?.serviceFee)}
+              {formatCurrency(
+                bookingDetail?.subtotal + bookingDetail?.serviceFee
+              )}
             </span>
             <span className='ml-1 text-sm font-normal text-neutral-500 dark:text-neutral-400'>
               total
             </span>
           </span>
           <ModalSelectGuests
-            onChangeGuests={handleChangeFilters}
-            guestAdults={filter?.guestAdults}
-            guestChildren={filter?.guestChildren}
+            onChangeGuests={(adults, children) =>
+              handleChangeFilter({ adults, children })
+            }
+            adults={filter?.adults}
+            children={filter?.children}
             renderChildren={({ openModal }) => (
               <span
                 onClick={openModal}
@@ -139,7 +123,7 @@ const MobileFooterSticky = () => {
         </div>
         <ButtonPrimary
           sizeClass='px-5 sm:px-7 py-3 !rounded-2xl'
-          disabled={details?.nights === 0}
+          disabled={bookingDetail?.nights === 0}
           onClick={handleConfirmBooking}
         >
           <span className='text-sm'>Book</span>

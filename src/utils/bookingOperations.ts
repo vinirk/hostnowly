@@ -14,8 +14,8 @@ import { BookingType } from 'types';
  * @param {number} price - The base price per night for the stay.
  * @param {string} startDate - The start date of the booking in YYYY-MM-DD format.
  * @param {string} endDate - The end date of the booking in YYYY-MM-DD format.
- * @param {number} guestAdults - The number of adult guests.
- * @param {number} guestChildren - The number of children guests, charged at half the adult price.
+ * @param {number} adults - The number of adult guests.
+ * @param {number} children - The number of children guests, charged at half the adult price.
  * @returns {Object} An object containing the detailed cost breakdown, including subtotals for adults and children,
  *                  the number of nights, total service fee, and the overall subtotal before the service fee.
  */
@@ -23,15 +23,15 @@ function calculateBookingCost(
   price: number,
   startDate: string,
   endDate: string,
-  guestAdults: number,
-  guestChildren: number
+  adults: number,
+  children: number
 ) {
   const start = new Date(startDate);
   const end = new Date(endDate);
   const nights = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24);
 
-  const subtotalAdults = nights * guestAdults * price;
-  const subtotalChildren = nights * guestChildren * (price * 0.5);
+  const subtotalAdults = nights * adults * price;
+  const subtotalChildren = nights * children * (price * 0.5);
   const subtotal = subtotalAdults + subtotalChildren;
   const serviceFee = subtotal * 0.1;
 
@@ -39,8 +39,8 @@ function calculateBookingCost(
     subtotal,
     serviceFee,
     nights,
-    guestAdults,
-    guestChildren,
+    adults,
+    children,
     subtotalAdults,
     subtotalChildren,
   };
@@ -73,6 +73,7 @@ function validateBookingAvailability(
     .filter((booking) => !booking.cancellationDate)
     .some((booking) => {
       if (booking.stayId === stayId) {
+        console.log(booking.startDate, booking.endDate, desiredStartDate, desiredEndDate)
         const start = new Date(booking.startDate).getTime();
         const end = new Date(booking.endDate).getTime();
         const filterStart = new Date(desiredStartDate).getTime();

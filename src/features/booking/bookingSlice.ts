@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 import { BlockedDates, BookingType } from 'types';
 import {
-  calculateBookingCost,
   generateConfirmationCode,
   validateBookingAvailability,
 } from 'utils/bookingOperations';
@@ -18,16 +17,18 @@ export interface FiltersPayload {
   guestChildren?: number;
 }
 
+interface BookingDetailPayload {
+  subtotal: number;
+  serviceFee: number;
+  nights: number;
+  subtotalAdults: number;
+  subtotalChildren: number;
+}
+
 interface BookingState {
   confirmedBookings: BookingType[];
   blockedDates: BlockedDates[];
-  details: {
-    subtotal: number;
-    serviceFee: number;
-    nights: number;
-    subtotalAdults: number;
-    subtotalChildren: number;
-  };
+  detail: BookingDetailPayload;
   filter: {
     price: number;
     location: string;
@@ -41,7 +42,7 @@ interface BookingState {
 const initialState: BookingState = {
   confirmedBookings: [],
   blockedDates: [],
-  details: {
+  detail: {
     subtotal: 0,
     serviceFee: 0,
     nights: 0,
@@ -61,25 +62,29 @@ const initialState: BookingState = {
 export const confirmBookingAsync = createAsyncThunk(
   'booking/confirmBooking',
   async ({ stayId }: any, { getState }) => {
-    const state = (getState() as RootState).booking;
+    console.log(stayId, 'stayid');
+    const filter = (getState() as RootState).filters;
+    const detail = (getState() as RootState).booking.detail;
+    const confirmedBookings = (getState() as RootState).booking
+      .confirmedBookings;
     const isBooked = validateBookingAvailability(
       stayId,
-      state.confirmedBookings,
-      state.filter.startDate,
-      state.filter.endDate
+      confirmedBookings,
+      normalizeDate(filter.startDate),
+      normalizeDate(filter.endDate)
     );
 
     if (!isBooked) {
       const newBooking: BookingType = {
         id: generateTimestampId(),
         stayId,
-        adults: state.filter.guestAdults,
-        children: state.filter.guestChildren,
-        startDate: new Date(state.filter.startDate).toISOString(),
-        endDate: new Date(state.filter.endDate).toISOString(),
+        adults: filter.adults ?? 0,
+        children: filter.children ?? 0,
+        startDate: normalizeDate(filter.startDate),
+        endDate: normalizeDate(filter.endDate),
         confirmationDate: new Date().toISOString(),
         confirmationCode: generateConfirmationCode(8),
-        totalPrice: state.details.subtotal + state.details.serviceFee,
+        totalPrice: detail.subtotal + detail.serviceFee,
       };
       return newBooking;
     }
@@ -105,32 +110,18 @@ export const cancelBookingAsync = createAsyncThunk(
   }
 );
 
+const normalizeDate = (dateStr?: string) => {
+  const date = new Date(dateStr ?? '');
+  date.setHours(0, 0, 0, 0);
+  return date.toISOString();
+};
+
 export const bookingSlice = createSlice({
   name: 'booking',
   initialState: initialState,
   reducers: {
-    setFilters: (state, action: PayloadAction<FiltersPayload>) => {
-      state.filter = { ...state.filter, ...action.payload };
-      // If price is set, calculate booking details
-      // Homepage does not have price, so we need to check
-      if (action.payload.price) {
-        const bookingDetails = calculateBookingCost(
-          action.payload.price,
-          state.filter.startDate,
-          state.filter.endDate,
-          state.filter.guestAdults,
-          state.filter.guestChildren
-        );
-        state.details = { ...state.details, ...bookingDetails };
-      }
-
-      state.filter.startDate =
-        action.payload.startDate ?? state.filter.startDate;
-      state.filter.endDate = action.payload.endDate ?? state.filter.endDate;
-      state.filter.guestAdults =
-        action.payload.guestAdults ?? state.filter.guestAdults;
-      state.filter.guestChildren =
-        action.payload.guestChildren ?? state.filter.guestChildren;
+    setBookingDetail: (state, action: PayloadAction<BookingDetailPayload>) => {
+      state.detail = { ...state.detail, ...action.payload };
     },
   },
   extraReducers: (builder) => {
@@ -140,16 +131,13 @@ export const bookingSlice = createSlice({
         state.blockedDates = [
           ...state.blockedDates,
           {
-            start: action.payload.startDate,
-            end: action.payload.endDate,
+            start: normalizeDate(action.payload.startDate),
+            end: normalizeDate(action.payload.endDate),
             stayId: action.payload.stayId,
             bookingId: action.payload.id,
           },
         ];
         state.filter = initialState.filter;
-      })
-      .addCase(confirmBookingAsync.rejected, (state, action) => {
-        console.error('Dispatch error', action);
       })
       .addCase(cancelBookingAsync.fulfilled, (state, action) => {
         state.confirmedBookings = state.confirmedBookings.map((booking) => {
@@ -177,4 +165,4 @@ export const bookingSlice = createSlice({
 });
 
 export default bookingSlice;
-export const { setFilters } = bookingSlice.actions;
+export const { setBookingDetail } = bookingSlice.actions;
