@@ -74,7 +74,7 @@ const HomePageBanner: FC<HomePageBannerProps> = ({ className = '' }) => (
           into exotic landscapes, relaxing on paradisiacal beaches, or exploring
           vibrant cities, we have the perfect stay for every special moment.
         </span>
-        <ButtonPrimary href='/featured-stays'>Start exploring</ButtonPrimary>
+        <ButtonPrimary href={goToStaysList()}>Start exploring</ButtonPrimary>
       </div>
 
       <div className='hidden sm:flex'>
