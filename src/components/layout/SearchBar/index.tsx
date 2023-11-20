@@ -1,5 +1,5 @@
 import { RootState } from 'app/store';
-import GuestsInput from 'components/GuestsInputPopover';
+import GuestsInput from 'components/layout/GuestsInputPopover/GuestsInputPopover';
 import ButtonSubmit from 'components/common/Button/ButtonSubmit';
 import DateRangeInput from 'components/common/DateRangeInputPopover/DateRangeInputPopover';
 import { FC } from 'react';

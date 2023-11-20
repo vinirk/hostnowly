@@ -1,9 +1,9 @@
 import { RootState } from 'app/store';
-import MobileFooterSticky from 'components/Navigation/(mobile)/MobileFooterSticker';
-import SidebarStayDetail from 'components/SidebarStayDetail';
-import SectionDateRange from 'components/StayDateRangeCard';
-import SectionStayDetail from 'components/StayDetailCard';
-import SectionStayGuests from 'components/StayDetailGuestsCard';
+import MobileFooterSticky from 'components/navigation/(mobile)/MobileFooterSticker';
+import SidebarStayDetail from 'components/layout/SidebarStayDetail';
+import SectionDateRange from 'components/layout/StayDateRangeCard/StayDateRangeCard';
+import SectionStayDetail from 'components/layout/StayDetailCard';
+import SectionStayGuests from 'components/layout/StayDetailGuestsCard/StayDetailGuestsCard';
 import ImageModal from 'components/common/SimpleImageModal/SimpleImageModal';
 import { setFilters } from 'features/filters/filtersSlice';
 import { FC, useState } from 'react';

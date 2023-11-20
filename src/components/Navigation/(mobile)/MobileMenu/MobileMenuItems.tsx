@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react';
-import { NavItemType } from 'components/Navigation/(desktop)/NavigationItem';
+import { NavItemType } from 'components/navigation/(desktop)/NavigationMenu/NavigationItem';
 import { ButtonClose } from 'components/common';
 import Logo from 'components/common/Logo';
 import React from 'react';

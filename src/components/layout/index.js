@@ -1,2 +1,12 @@
 export { default as Header } from './Header';
 export { default as HomepageBanner } from './HomepageBanner';
+export { default as StayCard } from './StayCard';
+export { default as StayCardGallerySlider } from './StayCardGallerySlider';
+export { default as GuestsInputPopover } from './GuestsInputPopover';
+export { default as ModalSelectDateRange } from './ModalSelectDateRange';
+export { default as ModalSelectGuests } from './ModalSelectGuests';
+export { default as SearchBar } from './SearchBar';
+export { default as SidebarStayDetail } from './SidebarStayDetail';
+export { default as StayDateRangeCard } from './StayDateRangeCard/StayDateRangeCard';
+export { default as StayDetailCard } from './StayDetailCard';
+export { default as StayDetailGuestsCard } from './StayDetailGuestsCard';

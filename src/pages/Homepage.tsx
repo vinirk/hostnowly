@@ -1,6 +1,6 @@
 import { BackgroundSection, Heading } from 'components/common';
 import { HomepageBanner } from 'components/layout';
-import StaysList from 'features/stays/StatysList';
+import StaysList from 'features/stays/StaysList';
 
 const Homepage = () => {
   return (

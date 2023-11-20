@@ -8,11 +8,11 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { StayType } from 'types';
 
-interface SectionStayGuestsProps {
+interface StayDetailGuestCardProps {
   title?: string;
 }
 
-const SectionStayGuests: React.FC<SectionStayGuestsProps> = ({ title }) => {
+const StayDetailGuestCard: React.FC<StayDetailGuestCardProps> = ({ title }) => {
   const { id } = useParams<{ id: string }>();
   const currentStay = useSelector((state: RootState) =>
     state.stays.items.find((item: StayType) => item.id === id)
@@ -64,4 +64,4 @@ const SectionStayGuests: React.FC<SectionStayGuestsProps> = ({ title }) => {
   );
 };
 
-export default SectionStayGuests;
+export default StayDetailGuestCard;

@@ -1,4 +1,4 @@
-import SearchBar from 'components/SearchBar';
+import SearchBar from 'components/layout/SearchBar';
 import ButtonPrimary from 'components/common/Button/ButtonPrimary';
 import { FC } from 'react';
 import { goToStaysList } from 'selectors/routes';

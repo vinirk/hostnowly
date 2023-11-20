@@ -1,6 +1,6 @@
 import { AppDispatch, RootState } from 'app/store';
-import ModalSelectDate from 'components/ModalSelectDateRange';
-import ModalSelectGuests from 'components/ModalSelectGuests';
+import ModalSelectDate from 'components/layout/ModalSelectDateRange';
+import ModalSelectGuests from 'components/layout/ModalSelectGuests';
 import ButtonPrimary from 'components/common/Button/ButtonPrimary';
 import { useToast } from 'contexts/ToastContext';
 import { confirmBookingAsync } from 'features/booking/bookingSlice';

@@ -1,4 +1,4 @@
-import { NavigationItems } from '../../../routers/navigation';
+import { NavigationItems } from '../../../../routers/navigation';
 import NavigationItem from './NavigationItem';
 
 function Navigation() {

@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { UserPlusIcon } from '@heroicons/react/24/outline';
-import ClearDataButton from 'components/SearchBar/ClearDataButton';
+import ClearDataButton from 'components/layout/SearchBar/ClearDataButton';
 import GuestsInput from 'components/common/GuestsInput/GuestsInput';
 
 export interface GuestsInputPopoverProps {

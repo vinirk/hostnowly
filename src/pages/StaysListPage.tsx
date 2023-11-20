@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Heading } from 'components/common';
-import StaysList from 'features/stays/StatysList';
+import StaysList from 'features/stays/StaysList';
 
 export interface StaysListPageProps {}
 

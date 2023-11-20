@@ -1,6 +1,6 @@
 import { Popover, Transition } from '@headlessui/react';
 import { CalendarIcon } from '@heroicons/react/24/outline';
-import ClearDataButton from 'components/SearchBar/ClearDataButton';
+import ClearDataButton from 'components/layout/SearchBar/ClearDataButton';
 import { useFilterChange } from 'hooks/useFilterChange';
 import { FC, Fragment } from 'react';
 import DatePicker, { ReactDatePickerCustomHeaderProps } from 'react-datepicker';

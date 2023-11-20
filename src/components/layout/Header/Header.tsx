@@ -1,10 +1,10 @@
-import MobileMenu from 'components/Navigation/(mobile)/MobileMenu';
-import Navigation from 'components/Navigation/(desktop)/Navigation';
+import MobileMenu from 'components/navigation/(mobile)/MobileMenu';
+import Navigation from 'components/navigation/(desktop)/NavigationMenu/Navigation';
 import Logo from 'components/common/Logo';
 import SwitchDarkMode from 'components/common/IconSwitchDarkMode/IconSwitchDarkMode';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import SearchMobile from 'components/Navigation/(mobile)/SearchMobile';
+import SearchMobile from 'components/navigation/(mobile)/SearchMobile';
 
 export interface HeaderProps {
   className?: string;

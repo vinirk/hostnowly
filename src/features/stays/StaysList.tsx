@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchStays } from './staysSlice';
 import { goToDetailByStayId } from 'selectors/routes';
 import { useNavigate } from 'react-router-dom';
-import { StayCard } from 'components';
+import { StayCard } from 'components/layout';
 
 const StaysList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

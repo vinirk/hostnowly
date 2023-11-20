@@ -1,5 +1,5 @@
 import { AppDispatch, RootState } from 'app/store';
-import GuestsInput from 'components/GuestsInputPopover';
+import GuestsInput from 'components/layout/GuestsInputPopover/GuestsInputPopover';
 import StarRating from 'components/common/StarRating';
 import ButtonPrimary from 'components/common/Button/ButtonPrimary';
 import DateRangeInput from 'components/common/DateRangeInputPopover/DateRangeInputPopover';

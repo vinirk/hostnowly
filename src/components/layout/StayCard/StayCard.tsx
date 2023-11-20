@@ -5,7 +5,7 @@ import { StayType } from 'types';
 import { FC } from 'react';
 import formatCurrency from 'utils/formatCurrency';
 import { Badge } from 'components/common';
-import StayCardGallerySlider from 'components/StayCardGallerySlider';
+import StayCardGallerySlider from '../StayCardGallerySlider';
 
 export interface StayCardProps {
   className?: string;
