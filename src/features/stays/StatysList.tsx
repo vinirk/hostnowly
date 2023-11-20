@@ -9,7 +9,7 @@ import { StayCard } from 'components';
 const StaysList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { stays, status, error } = useSelector(
+  const { items, status, error } = useSelector(
     (state: RootState) => state.stays
   );
 
@@ -26,7 +26,7 @@ const StaysList: React.FC = () => {
 
   return (
     <div className='grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {stays.map((stay) => (
+      {items.map((stay) => (
         <StayCard
           key={stay.id}
           onGoToDetail={() => handleGoToDetail(stay.id)}

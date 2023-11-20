@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { StayType } from 'types';
 import StaysService from './staysService';
 
-interface StaysState {
-  stays: StayType[];
+export interface StaysState {
+  items: StayType[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
 const initialState: StaysState = {
-  stays: [],
+  items: [],
   status: 'idle',
   error: null,
 };
@@ -30,7 +30,10 @@ const staysSlice = createSlice({
       })
       .addCase(fetchStays.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.stays = action.payload;
+        state.items = action.payload.map((stay) => ({
+          ...stay,
+          galleryImgs: stay.galleryImgs || [],
+        }));
       })
       .addCase(fetchStays.rejected, (state, action) => {
         state.status = 'failed';

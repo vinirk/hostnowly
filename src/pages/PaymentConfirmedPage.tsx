@@ -31,7 +31,7 @@ const PaymentConfirmedPage: FC<PaymentConfirmedPageProps> = ({
     )
   );
   const currentStay = useSelector((state: RootState) =>
-    state.general.stays.find(
+    state.stays.items.find(
       (item: StayType) => item.id === currentBooking?.stayId
     )
   );

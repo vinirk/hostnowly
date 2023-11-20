@@ -6,7 +6,6 @@ import {
 } from '@reduxjs/toolkit';
 import bookingSlice, { setBookingDetail } from 'features/booking/bookingSlice';
 import filtersSlice, { setFilters } from 'features/filters/filtersSlice';
-import generalSlice from 'features/general/generalSlice';
 import staysSlice from 'features/stays/staysSlice';
 import logger from 'redux-logger';
 import { calculateBookingCost } from 'utils/bookingOperations';
@@ -35,7 +34,6 @@ listenerMiddleware.startListening({
 export const store = configureStore({
   reducer: {
     booking: bookingSlice.reducer,
-    general: generalSlice.reducer,
     stays: staysSlice.reducer,
     filters: filtersSlice.reducer,
   },

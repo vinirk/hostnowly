@@ -39,7 +39,7 @@ export interface StayType {
   stars: number;
   reviewCount: number;
   like: boolean;
-  galleryImgs?: string[];
+  galleryImgs: string[];
   price: number;
   maxGuests: number;
   discount?: number | null;

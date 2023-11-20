@@ -17,7 +17,7 @@ const MobileFooterSticky = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const currentStay = useSelector((state: RootState) =>
-    state.general.stays.find((item: StayType) => item.id === id)
+    state.stays.items.find((item: StayType) => item.id === id)
   );
   const filter = useSelector((state: RootState) => state.filters);
   const bookingDetail = useSelector(

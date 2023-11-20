@@ -18,7 +18,7 @@ interface ListingDetailPageProps {
 const StayDetailPageContainer: FC<ListingDetailPageProps> = () => {
   const { id } = useParams<{ id: string }>();
   const currentStay = useSelector((state: RootState) =>
-    state.general.stays.find((item: StayType) => item.id === id)
+    state.stays.items.find((item: StayType) => item.id === id)
   );
   const filter = useSelector((state: RootState) => state.filters);
   const blockedDates = useSelector(
@@ -46,7 +46,7 @@ const StayDetailPageContainer: FC<ListingDetailPageProps> = () => {
         className='col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer '
         onClick={() => {
           setShowModal(true);
-          setCurrentSelectedImage(currentStay?.galleryImgs[0] || '');
+          setCurrentSelectedImage(currentStay?.galleryImgs[0] ?? '');
         }}
       >
         <img
@@ -128,18 +128,6 @@ const StayDetailPageContainer: FC<ListingDetailPageProps> = () => {
     </div>
   );
 };
-
-export interface BookingType {
-  id: string;
-  roomId: string;
-  guestIds: string[];
-  adults: number;
-  children: number;
-  infants: number;
-  startDate: Date;
-  endDate: Date;
-  totalPrice: number;
-}
 
 export default function ListingStayDetailPage() {
   return (

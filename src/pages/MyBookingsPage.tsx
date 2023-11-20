@@ -25,7 +25,7 @@ const MyBookingsPage: FC<MyBookingsPageProps> = ({
   const confirmedBookings = useSelector(
     (state: RootState) => state.booking?.confirmedBookings
   );
-  const listings = useSelector((state: RootState) => state.general.stays);
+  const listings = useSelector((state: RootState) => state.stays.items);
 
   useEffect(() => {
     if (confirmedBookings) {
