@@ -1,5 +1,5 @@
-import { StayType } from 'types';
-import __stays from '../../data/jsons/__stays.json';
+import { StayType } from "types";
+import __stays from "../../data/jsons/__stays.json";
 
 // Mock data for stays
 const mockStays: StayType[] = __stays;

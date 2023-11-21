@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'app/store';
-import { FiltersState, setFilters } from 'features/filters/filtersSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "app/store";
+import { FiltersState, setFilters } from "features/filters/filtersSlice";
 
 /**
  * Custom hook to handle filter changes.

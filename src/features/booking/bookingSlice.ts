@@ -1,21 +1,12 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from 'app/store';
-import { BlockedDates, BookingType } from 'types';
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "app/store";
+import { BlockedDateType, BookingType } from "types";
 import {
   generateConfirmationCode,
   validateBookingAvailability,
-} from 'utils/bookingOperations';
-import generateTimestampId from 'utils/idGenerator';
-
-export interface FiltersPayload {
-  price?: number;
-  location?: string;
-  startDate?: string;
-  endDate?: string;
-  guestAdults?: number;
-  guestChildren?: number;
-}
+} from "utils/bookingOperations";
+import generateTimestampId from "utils/idGenerator";
 
 interface BookingDetailPayload {
   subtotal: number;
@@ -27,16 +18,8 @@ interface BookingDetailPayload {
 
 interface BookingState {
   confirmedBookings: BookingType[];
-  blockedDates: BlockedDates[];
+  blockedDates: BlockedDateType[];
   detail: BookingDetailPayload;
-  filter: {
-    price: number;
-    location: string;
-    startDate: string;
-    endDate: string;
-    guestAdults: number;
-    guestChildren: number;
-  };
 }
 
 const initialState: BookingState = {
@@ -49,20 +32,12 @@ const initialState: BookingState = {
     subtotalAdults: 0,
     subtotalChildren: 0,
   },
-  filter: {
-    price: 0,
-    location: '',
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
-    guestAdults: 1,
-    guestChildren: 0,
-  },
 };
 
 export const confirmBookingAsync = createAsyncThunk(
-  'booking/confirmBooking',
+  "booking/confirmBooking",
   async ({ stayId }: any, { getState }) => {
-    console.log(stayId, 'stayid');
+    console.log(stayId, "stayid");
     const filter = (getState() as RootState).filters;
     const detail = (getState() as RootState).booking.detail;
     const confirmedBookings = (getState() as RootState).booking
@@ -70,8 +45,8 @@ export const confirmBookingAsync = createAsyncThunk(
     const isBooked = validateBookingAvailability(
       stayId,
       confirmedBookings,
-      normalizeDate(filter.startDate),
-      normalizeDate(filter.endDate)
+      normalizeDate(filter?.startDate ?? ""),
+      normalizeDate(filter.endDate ?? ""),
     );
 
     if (!isBooked) {
@@ -80,44 +55,45 @@ export const confirmBookingAsync = createAsyncThunk(
         stayId,
         adults: filter.adults ?? 0,
         children: filter.children ?? 0,
-        startDate: normalizeDate(filter.startDate),
-        endDate: normalizeDate(filter.endDate),
+        startDate: normalizeDate(filter?.startDate ?? ""),
+        endDate: normalizeDate(filter.endDate ?? ""),
         confirmationDate: new Date().toISOString(),
         confirmationCode: generateConfirmationCode(8),
         totalPrice: detail.subtotal + detail.serviceFee,
       };
       return newBooking;
     }
-    throw new Error('Booking is already confirmed for these dates');
-  }
+    throw new Error("Booking is already confirmed for these dates");
+  },
 );
 
 export const cancelBookingAsync = createAsyncThunk(
-  'booking/cancelBooking',
+  "booking/cancelBooking",
   async ({ id }: any, { getState }) => {
     const state = (getState() as RootState).booking;
 
     const currentBooking = state.confirmedBookings.find(
-      (booking) => booking.id === id
+      (booking) => booking.id === id,
     );
 
-    const cancelledBooking: BookingType = {
+    const canceledBooking: BookingType = {
       ...currentBooking!,
       cancellationDate: new Date().toISOString(),
     };
 
-    return cancelledBooking;
-  }
+    return canceledBooking;
+  },
 );
 
 const normalizeDate = (dateStr?: string) => {
-  const date = new Date(dateStr ?? '');
+  if (dateStr === null) return new Date().toISOString();
+  const date = new Date(dateStr ?? "");
   date.setHours(0, 0, 0, 0);
   return date.toISOString();
 };
 
 export const bookingSlice = createSlice({
-  name: 'booking',
+  name: "booking",
   initialState: initialState,
   reducers: {
     setBookingDetail: (state, action: PayloadAction<BookingDetailPayload>) => {
@@ -137,7 +113,6 @@ export const bookingSlice = createSlice({
             bookingId: action.payload.id,
           },
         ];
-        state.filter = initialState.filter;
       })
       .addCase(cancelBookingAsync.fulfilled, (state, action) => {
         state.confirmedBookings = state.confirmedBookings.map((booking) => {
@@ -159,7 +134,7 @@ export const bookingSlice = createSlice({
             }
             return null;
           })
-          .filter((blockedDate) => blockedDate !== null) as BlockedDates[];
+          .filter((blockedDate) => blockedDate !== null) as BlockedDateType[];
       });
   },
 });
