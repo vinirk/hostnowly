@@ -1,34 +1,34 @@
-import { CheckIcon } from '@heroicons/react/24/solid';
-import avatar1 from 'images/avatars/1.jpeg';
-import { FC } from 'react';
+import { CheckIcon } from "@heroicons/react/24/solid";
+import { FC } from "react";
+import avatar1 from "images/avatars/1.jpeg";
 
 const avatarColors = [
-  '#ffdd00',
-  '#fbb034',
-  '#ff4c4c',
-  '#c1d82f',
-  '#f48924',
-  '#7ac143',
-  '#30c39e',
-  '#06BCAE',
-  '#0695BC',
-  '#037ef3',
-  '#146eb4',
-  '#8e43e7',
-  '#ea1d5d',
-  '#fc636b',
-  '#ff6319',
-  '#e01f3d',
-  '#a0ac48',
-  '#00d1b2',
-  '#472f92',
-  '#388ed1',
-  '#a6192e',
-  '#4a8594',
-  '#7B9FAB',
-  '#1393BD',
-  '#5E13BD',
-  '#E208A7',
+  "#ffdd00",
+  "#fbb034",
+  "#ff4c4c",
+  "#c1d82f",
+  "#f48924",
+  "#7ac143",
+  "#30c39e",
+  "#06BCAE",
+  "#0695BC",
+  "#037ef3",
+  "#146eb4",
+  "#8e43e7",
+  "#ea1d5d",
+  "#fc636b",
+  "#ff6319",
+  "#e01f3d",
+  "#a0ac48",
+  "#00d1b2",
+  "#472f92",
+  "#388ed1",
+  "#a6192e",
+  "#4a8594",
+  "#7B9FAB",
+  "#1393BD",
+  "#5E13BD",
+  "#E208A7",
 ];
 
 export interface AvatarProps {
@@ -42,19 +42,19 @@ export interface AvatarProps {
 }
 
 const Avatar: FC<AvatarProps> = ({
-  containerClassName = 'ring-1 ring-white dark:ring-neutral-900',
-  sizeClass = 'h-6 w-6 text-sm',
-  radius = 'rounded-full',
+  containerClassName = "ring-1 ring-white dark:ring-neutral-900",
+  sizeClass = "h-6 w-6 text-sm",
+  radius = "rounded-full",
   imgUrl = avatar1,
   userName,
   hasChecked,
-  hasCheckedClass = 'w-4 h-4 -top-0.5 -right-0.5',
+  hasCheckedClass = "w-4 h-4 -top-0.5 -right-0.5",
 }) => {
-  const url = imgUrl || '';
-  const name = userName || 'Vinicius Ramos';
+  const url = imgUrl || "";
+  const name = userName || "Vinicius Ramos";
   const _setBgColor = (name: string) => {
     const backgroundIndex = Math.floor(
-      name.charCodeAt(0) % avatarColors.length
+      name.charCodeAt(0) % avatarColors.length,
     );
     return avatarColors[backgroundIndex];
   };
@@ -71,13 +71,13 @@ const Avatar: FC<AvatarProps> = ({
           alt={name}
         />
       )}
-      <span className='wil-avatar__name'>{name[0]}</span>
+      <span className="wil-avatar__name">{name[0]}</span>
 
       {hasChecked && (
         <span
           className={` bg-teal-500 rounded-full font-bold text-white text-xs flex items-center justify-center absolute ${hasCheckedClass}`}
         >
-          <CheckIcon className='w-4 h-3' />
+          <CheckIcon className="w-4 h-3" />
         </span>
       )}
     </div>

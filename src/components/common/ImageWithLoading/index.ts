@@ -1,1 +1,1 @@
-export { default } from './ImageWithLoading';
+export { default } from "./ImageWithLoading";

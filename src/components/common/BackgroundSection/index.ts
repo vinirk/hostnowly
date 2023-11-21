@@ -1,1 +1,1 @@
-export { default } from './BackgroundSection';
+export { default } from "./BackgroundSection";

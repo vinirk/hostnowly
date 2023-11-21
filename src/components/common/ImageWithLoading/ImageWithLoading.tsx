@@ -1,5 +1,5 @@
-import LoadingIcon from 'icons/LoadingIcon';
-import { FC, ImgHTMLAttributes, useEffect, useState } from 'react';
+import { FC, ImgHTMLAttributes, useEffect, useState } from "react";
+import LoadingIcon from "icons/LoadingIcon";
 
 export interface ImageWithLoadingProps
   extends ImgHTMLAttributes<HTMLImageElement> {
@@ -7,10 +7,10 @@ export interface ImageWithLoadingProps
 }
 
 const ImageWithLoading: FC<ImageWithLoadingProps> = ({
-  containerClassName = '',
-  alt = 'alt-img',
-  src = '',
-  className = 'object-cover w-full h-full',
+  containerClassName = "",
+  alt = "alt-img",
+  src = "",
+  className = "object-cover w-full h-full",
   ...args
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);

@@ -1,1 +1,1 @@
-export { default } from './IconSwitchDarkMode';
+export { default } from "./IconSwitchDarkMode";

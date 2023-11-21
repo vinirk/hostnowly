@@ -1,1 +1,1 @@
-export { default } from './StayCardGallerySlider';
+export { default } from "./StayCardGallerySlider";

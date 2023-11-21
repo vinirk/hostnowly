@@ -1,6 +1,6 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { FC } from 'react';
-import twFocusClass from 'utils/twFocusClass';
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { FC } from "react";
+import twFocusClass from "utils/twFocusClass";
 
 export interface NextPrevProps {
   className?: string;
@@ -14,38 +14,38 @@ export interface NextPrevProps {
 }
 
 const NextPrev: FC<NextPrevProps> = ({
-  className = '',
+  className = "",
   onClickNext = () => {},
   onClickPrev = () => {},
-  btnClassName = 'w-10 h-10',
+  btnClassName = "w-10 h-10",
   onlyNext = false,
   onlyPrev = false,
 }) => {
   return (
     <div
       className={`relative flex items-center text-neutral-900 dark:text-neutral-300 ${className}`}
-      data-glide-el='controls'
+      data-glide-el="controls"
     >
       {!onlyNext && (
         <button
           className={`${btnClassName} ${
-            !onlyPrev ? 'mr-[6px]' : ''
+            !onlyPrev ? "mr-[6px]" : ""
           } bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-6000 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 ${twFocusClass()}`}
           onClick={onClickPrev}
-          title='Prev'
-          data-glide-dir='<'
+          title="Prev"
+          data-glide-dir="<"
         >
-          <ChevronLeftIcon className='w-6 h-6' />
+          <ChevronLeftIcon className="w-6 h-6" />
         </button>
       )}
       {!onlyPrev && (
         <button
           className={`${btnClassName} bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-6000 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 ${twFocusClass()}`}
           onClick={onClickNext}
-          title='Next'
-          data-glide-dir='>'
+          title="Next"
+          data-glide-dir=">"
         >
-          <ChevronRightIcon className='w-6 h-6' />
+          <ChevronRightIcon className="w-6 h-6" />
         </button>
       )}
     </div>

@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from 'react';
-import { InputNumber } from 'components/common';
+import { FC } from "react";
+import { InputNumber } from "components/common";
 
 export interface GuestsInputProps {
   className?: string;
@@ -9,7 +9,7 @@ export interface GuestsInputProps {
 }
 
 const GuestsInput: FC<GuestsInputProps> = ({
-  className = '',
+  className = "",
   onChangeFilters = () => {},
   adults = 0,
   children = 0,
@@ -17,20 +17,20 @@ const GuestsInput: FC<GuestsInputProps> = ({
   return (
     <div className={`flex flex-col relative p-5 ${className}`}>
       <InputNumber
-        className='w-full'
+        className="w-full"
         defaultValue={adults}
         onChange={(value) => onChangeFilters(value, children)}
         max={20}
-        label='Adults'
-        desc='Ages 13 or above'
+        label="Adults"
+        desc="Ages 13 or above"
       />
       <InputNumber
-        className='w-full mt-6'
+        className="w-full mt-6"
         defaultValue={children}
         onChange={(value) => onChangeFilters(adults, value)}
         max={20}
-        label='Children'
-        desc='Ages 12 or below'
+        label="Children"
+        desc="Ages 12 or below"
       />
     </div>
   );

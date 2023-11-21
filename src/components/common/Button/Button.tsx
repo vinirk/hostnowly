@@ -1,5 +1,5 @@
-import React, { ButtonHTMLAttributes, FC } from 'react';
-import { Link } from 'react-router-dom';
+import React, { ButtonHTMLAttributes, FC } from "react";
+import { Link } from "react-router-dom";
 
 export interface ButtonProps {
   className?: string;
@@ -7,7 +7,7 @@ export interface ButtonProps {
   fontSize?: string;
   loading?: boolean;
   disabled?: boolean;
-  type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   href?: string;
   targetBlank?: boolean;
   onClick?: () => void;
@@ -15,9 +15,9 @@ export interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({
-  className = 'text-neutral-700 dark:text-neutral-200',
-  sizeClass = 'px-4 py-3 sm:px-6',
-  fontSize = 'text-sm sm:text-base font-medium',
+  className = "text-neutral-700 dark:text-neutral-200",
+  sizeClass = "px-4 py-3 sm:px-6",
+  fontSize = "text-sm sm:text-base font-medium",
   disabled = false,
   href,
   children,
@@ -30,10 +30,10 @@ const Button: FC<ButtonProps> = ({
   return href ? (
     <Link
       to={href}
-      target={targetBlank ? '_blank' : undefined}
+      target={targetBlank ? "_blank" : undefined}
       className={classes}
       onClick={onClick}
-      rel='noopener noreferrer'
+      rel="noopener noreferrer"
     >
       {children || `This is Link`}
     </Link>
