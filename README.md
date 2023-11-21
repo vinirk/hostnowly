@@ -72,6 +72,6 @@ const initialState: BookingState = {
   },
 };
 ```
-&**Booking, stays and filter slices are created.**
+**Booking, stays and filter slices are created.**
 
 ---
