@@ -20,38 +20,34 @@ const GuestsInputPopover: FC<GuestsInputPopoverProps> = ({
   onChangeFilters,
 }) => {
   return (
-    <Popover className={`flex relative ${className}`}>
+    <Popover className={`z-11 relative flex ${className}`}>
       {({ open }) => (
         <>
-          <div
-            className={`flex-1 flex items-center focus:outline-none rounded-b-3xl`}
-          >
-            <Popover.Button
-              className={`relative z-0 flex-1 flex text-left items-center p-3 space-x-3 focus:outline-none ${
-                open && highlightFocused ? "container-padding-focused" : ""
+          <Popover.Button
+            className={`flex-1 z-20 flex relative [ container-padding ] p-3 items-center space-x-3 focus:outline-none ${open && highlightFocused ? "container-padding-focused" : ""
               }`}
-            >
-              <div className="text-neutral-300 dark:text-neutral-400">
-                <UserPlusIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-              </div>
-              <div className="flex-grow">
-                <span className="block xl:text-lg font-semibold">
-                  {adults + children || ""}{" "}
-                  {adults + children > 1 ? "Guests" : "Guest"}
-                </span>
-                <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-                  {adults + children ? "Guests" : "Add guests"}
-                </span>
-              </div>
-              {!!(adults + children) && open && (
-                <ClearDataButton
-                  onClick={() => {
-                    onChangeFilters?.(0, 0);
-                  }}
-                />
-              )}
-            </Popover.Button>
-          </div>
+            onClickCapture={() => document.querySelector("html")?.click()}
+          >
+            <div className="text-neutral-300 dark:text-neutral-400">
+              <UserPlusIcon className="w-5 h-5 lg:w-7 lg:h-7" />
+            </div>
+            <div className="flex-grow text-left">
+              <span className="block xl:text-lg font-semibold">
+                {adults + children || ""}{" "}
+                {adults + children > 1 ? "Guests" : "Guest"}
+              </span>
+              <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
+                {adults + children ? "Guests" : "Add guests"}
+              </span>
+            </div>
+            {!!(adults + children) && open && (
+              <ClearDataButton
+                onClick={() => {
+                  onChangeFilters?.(0, 0);
+                }}
+              />
+            )}
+          </Popover.Button>
           <Transition
             as={Fragment}
             enter="transition ease-out duration-200"

@@ -36,10 +36,10 @@ const DateRangeInputPopover: FC<DateRangeInputPopoverProps> = ({
               })}
             {endDate &&
               " - " +
-                new Date(endDate).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "2-digit",
-                })}
+              new Date(endDate).toLocaleDateString("en-US", {
+                month: "short",
+                day: "2-digit",
+              })}
           </span>
           <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
             {"Check in - Check out"}
@@ -54,9 +54,8 @@ const DateRangeInputPopover: FC<DateRangeInputPopoverProps> = ({
       {({ open }) => (
         <>
           <Popover.Button
-            className={`flex-1 z-20 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${
-              open && highlightFocused ? "container-padding-focused" : ""
-            }`}
+            className={`flex-1 z-20 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${open && highlightFocused ? "container-padding-focused" : ""
+              }`}
             onClickCapture={() => document.querySelector("html")?.click()}
           >
             {renderInput()}
