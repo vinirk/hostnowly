@@ -1,77 +1,90 @@
-# Stay and Booking Management UI
+# Booking Management UI
 
-This React application utilizes Redux for state management and TypeScript for static typing, focusing on managing stays and bookings.
+This React application utilizes Redux RTK for state management and TypeScript for static typing.
 
 ## Features
 
-- **Listing and Detailing Stays**: Display a list of stays and view details for each.
-- **Booking Management**: Manage reservations and bookings.
-- **Stay Search and Filters**: Implement filters and search functionality for stays.
-- **Responsive Interface**: A user interface that adapts to both mobile and desktop devices.
+- **Listing and Detailing Stays**
+- **Booking Management**
+- **Responsive Interface**
 
 ## Technologies
 
 - **React**
 - **Redux Toolkit**
+- **Tailwind CSS**
 - **TypeScript**
 - **React Router**
  
+## Good Practices
+- **Smart/Dumb Components**
+- **Hooks**
+- **Selectors**
+- **Router**
+- **Context**
+- **Well-Organized Code and Folder Structure**
 
 ## Project Structure
 
 ```plaintext
 src/
-├── app/
-│   ├── store.ts             # Central Redux store configuration
-├── features/
-│   ├── stays/               # Feature module for stays management
-│   │   ├── staysSlice.ts    # Redux slice for managing stays data
-│   │   ├── StaysService.ts  # Service for handling stay-related API calls
-│   │   └── components/      # React components specific to stays
-│   ├── bookings/
-│   │   └── bookingsSlice.ts # Redux slice for managing booking data
-├── components/
-│   ├── common/              # Reusable components used across the app
-│   └── layout/              # Components that make up the layout of the app
-├── contexts/                # React Contexts for state management outside Redux
-├── routers/                 # Router configurations and route definitions
-├── selectors/               # Redux selectors for deriving data from the state
-├── hooks/                   # Custom React hooks for shared logic
-├── pages/                   # Page components for routing
-├── styles/                  # Global styles and style-related utilities
-├── utils/                   # Utility functions and helpers
-├── types/                   # TypeScript types and interfaces
-└── index.tsx                # Application entry point; renders the React app
+├─ app                                          
+│  ├─ App.tsx                                   
+│  └─ store.ts                                  
+├─ components                                   
+│  ├─ common                                    
+│  │  ├─ Avatar                                 
+│  │  │  ├─ Avatar.tsx                          
+│  │  │  └─ index.ts                            
+│  │  └─ index.ts                               
+│  └─ layout                                    
+│     ├─ Header                                 
+│     │  ├─ Header.tsx                          
+│     │  └─ index.ts                            
+│     └─ index.js                               
+├─ contexts                                     
+│  └─ ToastContext.tsx                          
+├─ data                                         
+├─ features                                     
+│  ├─ booking                                   
+│  │  └─ bookingSlice.ts                        
+│  ├─ filters                                   
+│  │  └─ filtersSlice.ts                        
+│  └─ stays                                     
+│     ├─ StaysList.tsx                          
+│     ├─ staysService.ts                        
+│     └─ staysSlice.ts                          
+├─ hooks                                        
+│  ├─ useFilterChange.ts                        
+├─ icons                                        
+├─ images                                       
+├─ pages                                        
+│  └─ StaysListPage.tsx                         
+├─ routers                                      
+│  ├─ index.tsx                                 
+│  ├─ navigation.ts                             
+│  └─ router.tsx                                
+├─ selectors                                    
+│  ├─ bookingSelectors.ts                       
+├─ styles                                       
+├─ types                                        
+├─ utils                                        
+│  ├─ bookingOperations.ts                      
 ```
 
----
-**NOTE** - **EDITED**
+#### `features` folder in Redux (RTK)
 
-Ongoing Refactoring:
+Using Redux (RTK) for state management
 
-The `features` module is currently undergoing a refactor. This aims to decouple the `stays`, `bookings`, and `filters` modules, enhancing the modularity and maintainability of the codebase. Currently, the bookingSlice is being used to handle both booking and filter functionalities. However, within the reducer, everything is well-divided to prevent confusion.
-
-```plaintext
-const initialState: BookingState = {
-  confirmedBookings: [],
-  blockedDates: [],
-  details: {
-    subtotal: 0,
-    serviceFee: 0,
-    nights: 0,
-    subtotalAdults: 0,
-    subtotalChildren: 0,
-  },
-  filter: {
-    price: 0,
-    location: '',
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
-    guestAdults: 1,
-    guestChildren: 0,
-  },
-};
+- **Each subfolder within features corresponds to a unique slice in RTK.**
+    - `stays`
+    - `booking`
+    - `filters`
+- **A slice includes reducers, actions, and the state specific to a feature of the application**
+- **Aligns with RTK's approach to reduce Redux boilerplate**
+- **Simplifies adding new features and scaling the application**
+- **Localizes changes to specific features, reducing the impact on unrelated parts of the app**
+- **Improves the overall maintainability and reliability of the application**
 ```
-**Booking, stays and filter slices are created.**
 
 ---
