@@ -45,7 +45,7 @@ src/
 ```
 
 ---
-**NOTE**
+**NOTE** **EDITED**
 
 Ongoing Refactoring:
 
@@ -72,5 +72,6 @@ const initialState: BookingState = {
   },
 };
 ```
+&**Booking, stays and filter slices are created.**
 
 ---
