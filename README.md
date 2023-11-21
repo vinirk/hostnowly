@@ -85,4 +85,3 @@ Using Redux (RTK) for state management
 - **Simplifies adding new features and scaling the application**
 - **Localizes changes to specific features, reducing the impact on unrelated parts of the app**
 - **Improves the overall maintainability and reliability of the application**
-```
