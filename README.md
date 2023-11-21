@@ -45,7 +45,7 @@ src/
 ```
 
 ---
-**NOTE** **EDITED**
+**NOTE** - **EDITED**
 
 Ongoing Refactoring:
 
