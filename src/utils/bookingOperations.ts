@@ -1,4 +1,4 @@
-import { BookingType } from 'types';
+import { BookingType } from "types";
 
 /**
  * Calculates the total cost of a booking based on various parameters.
@@ -24,7 +24,7 @@ function calculateBookingCost(
   startDate: string,
   endDate: string,
   adults: number,
-  children: number
+  children: number,
 ) {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -67,13 +67,18 @@ function validateBookingAvailability(
   stayId: string,
   confirmedBookings: BookingType[],
   desiredStartDate: string,
-  desiredEndDate: string
+  desiredEndDate: string,
 ) {
   const isBooked = confirmedBookings
     .filter((booking) => !booking.cancellationDate)
     .some((booking) => {
       if (booking.stayId === stayId) {
-        console.log(booking.startDate, booking.endDate, desiredStartDate, desiredEndDate)
+        console.log(
+          booking.startDate,
+          booking.endDate,
+          desiredStartDate,
+          desiredEndDate,
+        );
         const start = new Date(booking.startDate).getTime();
         const end = new Date(booking.endDate).getTime();
         const filterStart = new Date(desiredStartDate).getTime();
@@ -96,8 +101,8 @@ function validateBookingAvailability(
  * generateConfirmationCode(6) might return '4FRX2A'.
  */
 function generateConfirmationCode(length: number): string {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let result = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   const charactersLength = characters.length;
   for (let i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -105,6 +110,25 @@ function generateConfirmationCode(length: number): string {
   return result;
 }
 
+/**
+ * Calculates the number of nights between two dates.
+ *
+ * @param {string} startDate - The start date in string format.
+ * @param {string} endDate - The end date in string format.
+ * @returns {number} - The number of nights between the start and end dates.
+ */
+function getNumberOfNights(startDate: string, endDate: string): number {
+  const start = new Date(startDate);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(endDate);
+  end.setHours(0, 0, 0, 0);
+  const differenceInMilliseconds = end.getTime() - start.getTime();
+  return Math.round(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+}
+
 export {
-  calculateBookingCost, generateConfirmationCode, validateBookingAvailability
+  calculateBookingCost,
+  generateConfirmationCode,
+  validateBookingAvailability,
+  getNumberOfNights,
 };

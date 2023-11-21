@@ -1,4 +1,5 @@
-import generateTimestampId from 'utils/idGenerator';
+import { goToBookingHistory, goToStays } from "selectors/routes";
+import generateTimestampId from "utils/idGenerator";
 
 export interface NavItemType {
   id: string;
@@ -7,20 +8,20 @@ export interface NavItemType {
   targetBlank?: boolean;
 }
 
-export const NavigationItems: NavItemType[] = [
+export const NavigationMenuItems: NavItemType[] = [
   {
     id: generateTimestampId(),
-    href: '/',
-    name: 'Home',
+    href: "/",
+    name: "Home",
   },
   {
     id: generateTimestampId(),
-    href: '/stays',
-    name: 'Stays',
+    href: goToStays(),
+    name: "Stays",
   },
   {
     id: generateTimestampId(),
-    href: '/my-bookings',
-    name: 'Booking history',
+    href: goToBookingHistory(),
+    name: "Booking history",
   },
 ];

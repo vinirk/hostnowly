@@ -1,20 +1,18 @@
 // External library imports
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-
 // Absolute imports
-import App from 'app/App';
-import { store } from 'app/store';
-import reportWebVitals from 'reportWebVitals';
-import { ToastProvider } from 'contexts/ToastContext';
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import App from "app/App";
+import { store } from "app/store";
+import { ToastProvider } from "contexts/ToastContext";
+import reportWebVitals from "reportWebVitals";
+import "./index.css";
 // Style imports
-import './styles/index.scss';
-import './index.css';
+import "./styles/index.scss";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
@@ -23,7 +21,7 @@ root.render(
         <App />
       </ToastProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

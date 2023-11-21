@@ -1,14 +1,14 @@
 import {
   Action,
-  ThunkAction,
   configureStore,
   createListenerMiddleware,
-} from '@reduxjs/toolkit';
-import bookingSlice, { setBookingDetail } from 'features/booking/bookingSlice';
-import filtersSlice, { setFilters } from 'features/filters/filtersSlice';
-import staysSlice from 'features/stays/staysSlice';
-import logger from 'redux-logger';
-import { calculateBookingCost } from 'utils/bookingOperations';
+  ThunkAction,
+} from "@reduxjs/toolkit";
+import bookingSlice, { setBookingDetail } from "features/booking/bookingSlice";
+import filtersSlice, { setFilters } from "features/filters/filtersSlice";
+import staysSlice from "features/stays/staysSlice";
+import logger from "redux-logger";
+import { calculateBookingCost } from "utils/bookingOperations";
 
 const listenerMiddleware = createListenerMiddleware();
 
@@ -24,7 +24,7 @@ listenerMiddleware.startListening({
         startDate,
         endDate,
         adults || 1,
-        children || 0
+        children || 0,
       );
       listenerApi.dispatch(setBookingDetail(bookingDetails));
     }

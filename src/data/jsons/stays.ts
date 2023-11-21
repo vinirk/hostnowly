@@ -1,5 +1,5 @@
-import generateTimestampId from 'utils/idGenerator';
-import __stays from './__stays.json';
+import generateTimestampId from "utils/idGenerator";
+import __stays from "./__stays.json";
 
 const hoster = {
   id: generateTimestampId(),

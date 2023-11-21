@@ -70,7 +70,7 @@
   &--disabled {
     @apply relative bg-red-100 dark:bg-gray-700/50 rounded-none empty:opacity-0;
     &::after {
-      content: '';
+      content: "";
       @apply block h-full absolute border-l border-neutral-300 dark:border-neutral-700 rotate-45;
     }
   }

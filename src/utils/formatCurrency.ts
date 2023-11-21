@@ -16,11 +16,11 @@
  */
 export default function formatCurrency(
   value: number,
-  currency: string = 'USD',
-  locale: string = 'en-US'
+  currency: string = "USD",
+  locale: string = "en-US",
 ): string {
   const formattedValue = new Intl.NumberFormat(locale, {
-    style: 'currency',
+    style: "currency",
     currency: currency,
     minimumFractionDigits: value % 1 === 0 ? 0 : 2,
   }).format(value);

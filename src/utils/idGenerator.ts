@@ -11,10 +11,10 @@
  * Example:
  * generateTimestampId('user') might return 'user-1609459200000-1047227135'.
  */
-function generateTimestampId(prefix: string = '') {
+function generateTimestampId(prefix: string = "") {
   const timestamp = Date.now().toString(36); // Base-36 encoding of the timestamp
   const random = Math.random().toString(36).slice(2); // Base-36 random string
-  return `${prefix ? `${prefix}-` : ''}${timestamp}-${random}`;
+  return `${prefix ? `${prefix}-` : ""}${timestamp}-${random}`;
 }
 
 export default generateTimestampId;

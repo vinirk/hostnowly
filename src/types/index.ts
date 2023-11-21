@@ -13,11 +13,11 @@ export interface GuestType extends UserType {
   bookings: BookingType;
 }
 
-export interface BlockedDates {
+export interface BlockedDateType {
   start: string;
   end: string;
-  bookingId: string;
-  stayId: string;
+  bookingId?: string;
+  stayId?: string;
 }
 
 export interface RoomPreviewType {

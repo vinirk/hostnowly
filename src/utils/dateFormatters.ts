@@ -1,20 +1,20 @@
 // Formats a date range (start and end) in a readable format.
 // If the end date is not provided, only the start date is formatted.
 // Example Output: "Mar 3 - Apr 4, 2023" or "Mar 3, 2023" if end date is absent.
-const formatDate = (startDate: string, endDate: string = '') => {
+const formatDate = (startDate: string, endDate?: string) => {
   const monthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   const start = new Date(startDate);
@@ -38,8 +38,8 @@ function formatDateTime(dateString: string): string {
   }/${date.getDate()}/${date.getFullYear()}`;
 
   let hours = date.getHours();
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const timePeriod = hours >= 12 ? 'PM' : 'AM';
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const timePeriod = hours >= 12 ? "PM" : "AM";
 
   hours = hours % 12 || 12;
   const formattedTime = `${hours}:${minutes} ${timePeriod}`;

@@ -31,7 +31,8 @@
 
 .container-padding-focused {
   @apply rounded-full dark:bg-white/5;
-  box-shadow: rgba(19, 19, 28, 0.05) 0px 4px 16px,
+  box-shadow:
+    rgba(19, 19, 28, 0.05) 0px 4px 16px,
     rgba(19, 19, 28, 0.05) 0px 8px 32px;
 }
 
@@ -51,7 +52,8 @@
 
 .container-padding-focused--2 {
   @apply rounded-full dark:bg-white/5;
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+  box-shadow:
+    rgba(17, 17, 26, 0.05) 0px 4px 16px,
     rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
@@ -63,10 +65,10 @@
   @apply w-full flex flex-col rounded-2xl border-b border-t border-l border-r border-neutral-200 dark:border-neutral-700 space-y-6 xl:space-y-7 pb-10 p-2 sm:p-4 xl:px-8 xl:py-6;
 }
 
-input[type='time']::-webkit-calendar-picker-indicator {
+input[type="time"]::-webkit-calendar-picker-indicator {
   @apply dark:bg-neutral-500 rounded-md;
 }
 
-[type='button'] {
+[type="button"] {
   -webkit-appearance: none !important;
 }
