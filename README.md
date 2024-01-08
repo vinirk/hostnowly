@@ -1,4 +1,4 @@
-# Booking Management UI
+# Booking Management Reactjs UI
 
 This React application utilizes Redux RTK for state management and TypeScript for static typing.
 
